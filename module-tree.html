@@ -217,7 +217,7 @@
                 subModules.forEach((sm, idx) => {
                     const leafNum = idx + 1;
                     const leaf = document.createElement(sm.locked ? 'div' : 'a');
-                    if (!sm.locked) leaf.href = 'lesson.html';
+                    if (!sm.locked) leaf.href = `lesson.html?mid=${moduleId}&sid=${idx}`;
                     
                     const isRight = leafNum % 2 === 0;
                     leaf.className = `leaf bamboo-item leaf-pos-${leafNum} ${isRight ? 'right' : 'left'} ${sm.locked ? 'locked' : ''}`;

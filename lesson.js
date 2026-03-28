@@ -200,6 +200,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // --- PROGRESS TRACKING ---
+    const params = new URLSearchParams(window.location.search);
+    const mid = parseInt(params.get('mid')) || 1;
+    const sid = parseInt(params.get('sid')) || 0;
+    
+    function updateStudentProgress() {
+        if (typeof Auth !== 'undefined' && typeof ModulesData !== 'undefined') {
+            const modules = ModulesData.getModules();
+            const mod = modules.find(m => m.id === mid);
+            if (mod && mod.subModules && mod.subModules[sid]) {
+                const subMod = mod.subModules[sid];
+                Auth.updateProgress(mid, sid, subMod.title);
+            }
+        }
+    }
+
     // --- RENDERER ---
     function initDots() {
         stepDotsContainer.innerHTML = '';
@@ -219,6 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lessonContent.innerHTML = data.content;
         document.getElementById('lesson-title').innerText = data.title;
         stepDots.forEach((dot, idx) => dot.classList.toggle('active', idx === index));
+
+        // Update progress when step changes
+        updateStudentProgress();
 
         if (data.type === 'theory') {
             document.getElementById('next-step-btn').onclick = () => renderStep(index + 1);

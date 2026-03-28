@@ -49,14 +49,21 @@ const storage = {
 if (!storage.getItem(STORAGE_KEY)) {
     const initialUsers = [
         { username: 'admin', password: '123', role: 'teacher' },
-        { username: 'student', password: '456', role: 'student' }
+        { username: 'student', password: '456', role: 'student', progress: { moduleId: 1, subModuleIdx: 2, title: 'Грамматическая основа' } },
+        { username: 'мария', password: '789', role: 'student', progress: { moduleId: 1, subModuleIdx: 0, title: 'Введение' } }
     ];
     storage.setItem(STORAGE_KEY, JSON.stringify(initialUsers));
 }
 
 const Auth = {
     getUsers() {
-        return JSON.parse(storage.getItem(STORAGE_KEY) || '[]');
+        try {
+            return JSON.parse(storage.getItem(STORAGE_KEY) || '[]');
+        } catch(e) { return []; }
+    },
+
+    saveUsers(users) {
+        storage.setItem(STORAGE_KEY, JSON.stringify(users));
     },
 
     login(username, password) {
@@ -77,7 +84,34 @@ const Auth = {
 
     getCurrentUser() {
         const user = storage.getItem(SESSION_KEY);
-        return user ? JSON.parse(user) : null;
+        if (!user) return null;
+        try {
+            const parsed = JSON.parse(user);
+            // Always refresh from "db" to get latest progress
+            const dbUsers = this.getUsers();
+            return dbUsers.find(u => u.username === parsed.username) || parsed;
+        } catch(e) { return null; }
+    },
+
+    updateProgress(moduleId, subModuleIdx, title) {
+        const currentUser = this.getCurrentUser();
+        if (!currentUser || currentUser.role !== 'student') return;
+
+        const users = this.getUsers();
+        const userIdx = users.findIndex(u => u.username === currentUser.username);
+        
+        if (userIdx !== -1) {
+            users[userIdx].progress = {
+                moduleId,
+                subModuleIdx,
+                title,
+                timestamp: new Date().toISOString()
+            };
+            this.saveUsers(users);
+            // Update session too
+            storage.setItem(SESSION_KEY, JSON.stringify(users[userIdx]));
+            console.log('Progress updated for', currentUser.username);
+        }
     },
 
     isTeacher() {
@@ -88,7 +122,6 @@ const Auth = {
     checkAuth(requiredRole = null) {
         const user = this.getCurrentUser();
         if (!user) {
-            console.warn('Auth check failed: No user found. Redirecting to login.html');
             window.location.href = 'login.html';
             return;
         }

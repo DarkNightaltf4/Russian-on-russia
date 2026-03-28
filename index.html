@@ -294,7 +294,7 @@
         const user = Auth.getCurrentUser();
         if (user) {
             const navActions = document.getElementById('nav-actions');
-            const targetUrl = user.role === 'teacher' ? 'admin.html' : 'index.html';
+            const targetUrl = user.role === 'teacher' ? 'admin.html' : 'profile.html';
             navActions.innerHTML = `
                 <a href="${targetUrl}" class="btn btn-secondary" style="padding: 10px 24px; font-size: 14px; border-radius: 16px;">Кабинет</a>
                 <button onclick="Auth.logout()" class="btn-text" style="font-size: 14px;">Выйти</button>
