@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русский по-русски | Подготовка к экзаменам</title>
+    <!-- Подключаем современный красивый шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
+    <script src="modules-data.js"></script>
+</head>
+
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">🌿 Русский по-русски</div>
+            <nav class="nav-links">
+                <a href="#about">Обо мне</a>
+                <a href="#methodology">Методика</a>
+                <a href="#shop">Пособия</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="lesson.html" style="color: var(--accent-peach);">Грамматика ✨</a>
+            </nav>
+            <div class="nav-actions" id="nav-actions">
+                <a href="login.html" class="btn btn-secondary" id="login-link"
+                    style="padding: 10px 24px; font-size: 14px; border-radius: 16px;">Войти</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="container hero">
+        <div class="hero-text">
+            <h1>Русский язык для людей,<br>а не академиков.</h1>
+            <p>Забудь про скучные правила и зубрежку. Подготовься к экзаменам на высокий балл с помощью красивых пособий
+                и интерактивной платформы.</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn btn-primary">Выбрать пособие</a>
+                <a href="lesson.html" class="btn btn-secondary">Попробовать урок</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-image-inner">
+                Здесь будет ваше стильное фото
+            </div>
+        </div>
+    </section>
+
+    <!-- ОБО МНЕ -->
+    <section class="container about-section" id="about">
+        <div class="about-grid">
+            <div class="about-image">
+                <div class="image-wrapper">
+                    <img src="photo_2025-10-31_21-26-51.jpg" alt="Мария Степанова">
+                </div>
+            </div>
+            <div class="about-text">
+                <span class="badge">Ваш проводник в мир грамотности</span>
+                <h2>Степанова Мария Константиновна</h2>
+                <p class="expert-title">Репетитор по русскому языку и литературе</p>
+                <div class="bio-content">
+                    <p>Я создала «Человеческий русский», потому что устала видеть, как способные ученики мучаются над
+                        сухими определениями из учебников. Моя цель — показать, что грамматика логична, а литература —
+                        это не про скучные тесты, а про жизнь.</p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">6+</span>
+                            <span class="stat-label">Лет опыта</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Учеников</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">90+</span>
+                            <span class="stat-label">Средний балл</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СЛОЖНАЯ ГРАММАТИКА (МЕТОДИКА) -->
+    <section class="container features" id="methodology">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <span class="badge">Методика обучения</span>
+            <h2>Грамматика разложена по полочкам</h2>
+        </div>
+        <div class="cards scroll-reveal-container">
+            <div class="card reveal-card">
+                <div class="card-icon">📖</div>
+                <h3>Понятная теория</h3>
+                <p>Никаких сложных определений. Только суть, примеры и визуальные ассоциации, которые запоминаются сами.
+                </p>
+            </div>
+            <div class="card reveal-card">
+                <div class="card-icon">🎯</div>
+                <h3>Интерактивная практика</h3>
+                <p>Собирайте предложения, выделяйте основу и расставляйте запятые прямо на платформе.</p>
+            </div>
+            <div class="card reveal-card">
+                <div class="card-icon">📈</div>
+                <h3>Результат на экзамене</h3>
+                <p>Методика проверена сотнями учеников, которые сдали ОГЭ и ЕГЭ на отлично.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section class="container reviews-section" id="reviews">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <span class="badge">Обратная связь</span>
+            <h2>Что говорят ученики и родители</h2>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">М</div>
+                    <div class="review-info">
+                        <h4>Максим, 11 класс</h4>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p>«До занятий с Марией русский казался дремучим лесом. Благодаря "деревьям знаний" я наконец понял, где
+                    ставить запятые. Итог: 96 баллов на ЕГЭ!»</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">А</div>
+                    <div class="review-info">
+                        <h4>Анна Петровна</h4>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p>«Дочь начала заниматься с удовольствием. Пособия просто изумительные — их хочется рассматривать как
+                    искусство. Очень рекомендую как платформу, так и личные занятия.»</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">Д</div>
+                    <div class="review-info">
+                        <h4>Даниил, 9 класс</h4>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p>«Бесплатный урок с основой предложения — просто пушка. За 10 минут понял то, что в школе не могли
+                    объяснить год. Жду открытия полного доступа!»</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ИНТЕРАКТИВНОЕ ДЕРЕВО -->
+    <section class="container" id="platform">
+        <div class="interactive-section scroll-reveal-tree">
+            <span class="badge">Ваша платформа обучения</span>
+            <h2>Потрогай Русский язык руками</h2>
+            <p style="color: var(--text-light); max-width: 600px; margin: 0 auto;">Начни с основ. Грамматика — это не
+                страшно, если она наглядная.</p>
+
+            <div class="tree-container">
+                <svg class="tree-crown-svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMax meet">
+                    <path class="crown-path" d="M400,380 
+                        C300,380 240,340 200,300 
+                        C100,300 40,240 70,140 
+                        C90,60 240,0 320,40 
+                        C340,-20 460,-20 480,40 
+                        C560,0 700,60 730,140 
+                        C760,240 700,300 600,300 
+                        C560,340 500,380 400,380 Z" />
+                </svg>
+                <div class="tree-trunk"></div>
+                <!-- Ветки -->
+                <div class="tree-branch branch-1"></div>
+                <div class="tree-branch branch-2"></div>
+                <div class="tree-branch branch-3"></div>
+                <div class="tree-branch branch-4"></div>
+                <div class="tree-branch branch-5"></div>
+                <div class="tree-branch branch-6"></div>
+                <div class="tree-branch branch-7"></div>
+                <div id="tree-leaves-container">
+                    <!-- Leaves will be rendered dynamically -->
+                </div>
+            </div>
+
+            <a href="lesson.html" class="btn btn-primary" style="margin-top: 60px;">Пройти первый бесплатный урок</a>
+        </div>
+    </section>
+
+    <!-- ВИТРИНА ПОСОБИЙ -->
+    <section class="container shop" id="shop">
+        <div class="shop-header">
+            <div>
+                <h2>Мои авторские пособия</h2>
+                <p style="color: var(--text-light);">PDF-тетради, которые хочется распечатать и повесить на стену.</p>
+            </div>
+        </div>
+
+        <div class="product-grid">
+            <!-- Товар 1 -->
+            <div class="product-card">
+                <div class="product-image">Обложка: Пунктуация</div>
+                <div class="product-info">
+                    <span class="badge">PDF + Практика</span>
+                    <h3>Инструкция по пунктуации</h3>
+                    <p style="color: var(--text-light); font-size: 14px; margin-top: 10px;">Все запятые, тире и
+                        двоеточия для ОГЭ без лишней воды.</p>
+                    <div class="product-price">790 ₽</div>
+                    <a href="payment.html" class="btn btn-primary" style="width: 100%; text-align: center;">В
+                        корзину</a>
+                </div>
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="product-card">
+                <div class="product-image">Обложка: Орфография</div>
+                <div class="product-info">
+                    <span class="badge">PDF + Практика</span>
+                    <h3>Сюжет на ладони: Лирика</h3>
+                    <p style="color: var(--text-light); font-size: 14px; margin-top: 10px;">Анализ стихов для сочинения.
+                        Визуальные конспекты.</p>
+                    <div class="product-price">890 ₽</div>
+                    <a href="payment.html" class="btn btn-primary" style="width: 100%; text-align: center;">В
+                        корзину</a>
+                </div>
+            </div>
+
+            <!-- Товар 3 -->
+            <div class="product-card" style="border: 3px solid var(--accent-peach);">
+                <div class="product-info">
+                    <span class="badge" style="background: var(--accent-peach); color: white;">Подписка</span>
+                    <h3>Полное погружение</h3>
+                    <p style="color: var(--text-light); font-size: 14px; margin-top: 10px;">Доступ ко всем пособиям +
+                        интерактивной платформе на месяц.</p>
+                    <div class="product-price">1 290 ₽ / мес</div>
+                    <a href="payment.html" class="btn btn-primary" style="width: 100%; text-align: center;">Оформить</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        <div class="container">
+            <div class="logo">🌿 человеческий русский</div>
+            <p>Сделано с любовью к языку и людям.</p>
+            <div class="footer-links">
+                <a href="#">Telegram-канал</a>
+                <a href="#">Договор оферты</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll Reveal for Feature Cards
+        const revealCards = document.querySelectorAll('.reveal-card');
+        const observerOptions = {
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Trigger each card one by one when section enters
+                    revealCards.forEach((card, idx) => {
+                        setTimeout(() => {
+                            card.classList.add('active');
+                        }, idx * 400); // 400ms delay between each "slide out"
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const container = document.querySelector('.scroll-reveal-container');
+        if (container) observer.observe(container);
+
+        // Check Auth Status for Nav
+        const user = Auth.getCurrentUser();
+        if (user) {
+            const navActions = document.getElementById('nav-actions');
+            const targetUrl = user.role === 'teacher' ? 'admin.html' : 'index.html';
+            navActions.innerHTML = `
+                <a href="${targetUrl}" class="btn btn-secondary" style="padding: 10px 24px; font-size: 14px; border-radius: 16px;">Кабинет</a>
+                <button onclick="Auth.logout()" class="btn-text" style="font-size: 14px;">Выйти</button>
+            `;
+        }
+
+        // Dynamic Tree Rendering
+        function renderTreeLeaves() {
+            const container = document.getElementById('tree-leaves-container');
+            const modules = ModulesData.getModules();
+            container.innerHTML = '';
+
+            modules.forEach((mod, idx) => {
+                const leaf = document.createElement(mod.locked ? 'div' : 'a');
+                if (!mod.locked) {
+                    // Lead to the sub-tree page
+                    leaf.href = `module-tree.html?id=${mod.id}`;
+                }
+                leaf.className = `leaf leaf-${idx + 1} ${mod.locked ? 'locked' : 'active-leaf'}`;
+                
+                leaf.innerHTML = `
+                    <i>${idx + 1}</i>
+                    <div class="tooltip">
+                        <b>${mod.title}</b><br>
+                        ${mod.description}<br><br>
+                        ${mod.longDesc || (mod.locked ? '🔒 Закрыто' : '👉 Нажми, чтобы увидеть карту')}
+                    </div>
+                `;
+                container.appendChild(leaf);
+            });
+        }
+
+        renderTreeLeaves();
+
+        // Tree Growth Observer
+        const treeSection = document.querySelector('.scroll-reveal-tree');
+        if (treeSection) {
+            const treeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        treeSection.classList.add('active');
+                        treeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            treeObserver.observe(treeSection);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Преподаватель</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js"></script>
+    <script src="modules-data.js"></script>
+    <style>
+        .admin-page {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .teacher-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-peach);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: 800;
+        }
+
+        .modules-manager {
+            background: white;
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .modules-manager h2 {
+            margin-bottom: 30px;
+        }
+
+        .modules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .module-item {
+            background: var(--bg-color);
+            padding: 24px;
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 50px 1fr 120px 150px;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .module-item:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.01);
+            background: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+        }
+
+        .module-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--accent-green);
+            opacity: 0.5;
+        }
+
+        .module-details h4 {
+            margin-bottom: 4px;
+        }
+
+        .module-details p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .module-status {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 100px;
+            text-align: center;
+        }
+
+        .status-open { background: rgba(138, 168, 143, 0.1); color: var(--accent-green); }
+        .status-locked { background: rgba(211, 204, 193, 0.2); color: #A09688; }
+
+        .module-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            background: var(--accent-green);
+            color: white;
+            border-color: var(--accent-green);
+        }
+
+        .btn-icon:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .welcome-card {
+            background: linear-gradient(45deg, var(--accent-green), var(--accent-green-dark));
+            color: white;
+            padding: 40px;
+            border-radius: 40px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .welcome-text h1 { font-size: 32px; margin-bottom: 10px; }
+        .welcome-text p { opacity: 0.9; font-size: 18px; }
+
+        @media (max-width: 900px) {
+            .module-item {
+                grid-template-columns: 50px 1fr;
+            }
+            .module-status, .module-actions {
+                grid-column: span 2;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body style="background: var(--bg-color);">
+    <script>
+        console.log('Checking auth status...');
+        Auth.checkAuth('teacher');
+    </script>
+
+    <div class="admin-page">
+        <header class="dashboard-header">
+            <a href="index.html" class="logo">🌿 Русский по-русски</a>
+            <div class="teacher-info">
+                <span id="teacher-name">Мария Константиновна</span>
+                <div class="avatar">М</div>
+                <button class="btn btn-secondary" onclick="Auth.logout()" style="padding: 10px 24px; font-size: 14px;">Выйти</button>
+            </div>
+        </header>
+
+        <section class="welcome-card">
+            <div style="font-size: 80px;">🎓</div>
+            <div class="welcome-text">
+                <h1>Кабинет управления обучением</h1>
+                <p>Здесь вы можете видеть все учебные модули и управлять их порядком на сайте.</p>
+            </div>
+        </section>
+
+        <main class="modules-manager">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px;">
+                <div>
+                    <h2>Управление модулями</h2>
+                    <p style="color: var(--text-light); margin-top: -20px;">Порядок модулей определяет их положение на дереве знаний.</p>
+                </div>
+            </div>
+
+            <div id="modules-list" class="modules-list">
+                <!-- Modules will be rendered here -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function renderModules() {
+            const list = document.getElementById('modules-list');
+            const modules = ModulesData.getModules();
+            list.innerHTML = '';
+
+            modules.forEach((mod, idx) => {
+                const item = document.createElement('div');
+                item.className = 'module-item';
+                item.innerHTML = `
+                    <div class="module-number">${idx + 1}</div>
+                    <div class="module-details">
+                        <h4>${mod.title}</h4>
+                        <p>${mod.description}</p>
+                    </div>
+                    <div class="module-status ${mod.locked ? 'status-locked' : 'status-open'}">
+                        ${mod.locked ? '🔒 Закрыто' : '🔓 Доступно'}
+                    </div>
+                    <div class="module-actions">
+                        <button class="btn-icon" onclick="moveModule(${idx}, ${idx - 1})" ${idx === 0 ? 'disabled' : ''} title="Вверх">↑</button>
+                        <button class="btn-icon" onclick="moveModule(${idx}, ${idx + 1})" ${idx === modules.length - 1 ? 'disabled' : ''} title="Вниз">↓</button>
+                        <button class="btn-icon" onclick="toggleLock(${idx})" title="${mod.locked ? 'Открыть' : 'Закрыть'}">${mod.locked ? '🔓' : '🔒'}</button>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function moveModule(from, to) {
+            ModulesData.moveModule(from, to);
+            renderModules();
+        }
+
+        function toggleLock(idx) {
+            const modules = ModulesData.getModules();
+            modules[idx].locked = !modules[idx].locked;
+            ModulesData.saveModules(modules);
+            renderModules();
+        }
+
+        document.addEventListener('DOMContentLoaded', renderModules);
+    </script>
+</body>
+</html>

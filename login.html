@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Русский по-русски</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FAF8F5 0%, #E8E2D9 100%);
+            padding: 20px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .login-card h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--text-main);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            background: white;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 4px rgba(138, 168, 143, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .login-footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .login-footer a {
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .error-msg {
+            color: var(--accent-peach);
+            background: rgba(244, 162, 126, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-card">
+            <h1>Рады видеть вас! 👋</h1>
+            <div id="error-msg" class="error-msg">Неверный логин или пароль</div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Логин</label>
+                    <input type="text" id="username" placeholder="admin" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="password" placeholder="123" required>
+                </div>
+                <button type="submit" class="btn btn-primary login-btn">Войти в кабинет</button>
+            </form>
+            <div class="login-footer">
+                Нет аккаунта? Попросите у Марии! ✨
+                <br><br>
+                <div id="auth-status" style="font-size: 10px; color: #ccc; margin-top: 10px;">Система загружена (v1.1)</div>
+                <br>
+                <a href="index.html">← На главную</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        const form = document.getElementById('login-form');
+        const errorMsg = document.getElementById('error-msg');
+        const statusMsg = document.getElementById('auth-status');
+
+        if (typeof Auth === 'undefined') {
+            statusMsg.innerText = '⚠️ Ошибка: Система авторизации не найдена!';
+            statusMsg.style.color = 'red';
+        } else if (!Auth.isStorageHealthy()) {
+            statusMsg.innerHTML = '⚠️ Хранилище браузера заблокировано!<br>Сайт работает некорректно без локального сервера.<br>Попробуйте открыть через VS Code Live Server.';
+            statusMsg.style.color = '#F4A27E';
+            statusMsg.style.fontSize = '12px';
+        }
+
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            
+            console.log('Login attempt:', u);
+            const user = Auth.login(u, p);
+            
+            if (user) {
+                console.log('Login success!', user);
+                const target = user.role === 'teacher' ? 'admin.html' : 'index.html';
+                window.location.href = target;
+            } else {
+                console.error('Login failed: Invalid credentials');
+                errorMsg.style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>
